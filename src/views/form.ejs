@@ -1,6 +1,6 @@
 <%- include('header') -%>
 
-<li class="backButton"><a href="/"><</a></li>
+<li class="back-button"><a href="/"><</a></li>
 <form class="form" method="post" action="/form">
   <!-- Flokkaval -->
   <div class="flokkaval">
@@ -15,7 +15,7 @@
   <!-- Spurning -->
   <div class="spurning">
     <label for="name">Spurning</label>
-    <textarea id="questionInput" name="name" rows="5" required></textarea>
+    <textarea id="question-input" name="name" rows="5" required></textarea>
   </div>
 
   <!-- Svarmöguleikar -->
@@ -26,10 +26,10 @@
         <input type="radio" name="rett_svar" value="0" class="rett-radio"> Rétt?
       </div>
    </div>
-   <button type="button" id="add-answer" class="addAnswerButton">Bæta við svarmöguleika</button>
+   <button type="button" id="add-answer" class="add-answer-button">Bæta við svarmöguleika</button>
 
    <!-- Svartakki-->
-  <button class="formButton" type="submit">Búa til spurningu</button>
+  <button class="form-button" type="submit">Búa til spurningu</button>
 </form>
 
 <%- include('footer') -%>

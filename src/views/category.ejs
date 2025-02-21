@@ -1,11 +1,11 @@
 <%- include('header') -%>
 
-<a href="/" class="backButton"><p><</p></a>
+<a href="/" class="back-button"><p><</p></a>
 <ul class="questions">
     <% locals.questions.forEach((question, question_index) => { %>
         <li class="question"><%=question.question%></li>
     <% }) %>
 </ul>
-<button type="submit" class="formButton">Senda inn svör</a>
+<button type="submit" class="form-button">Senda inn svör</a>
 
 <%- include('footer') -%>

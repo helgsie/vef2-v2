@@ -21,7 +21,7 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  padding: 1.5rem 2rem 6rem 2rem;
+  padding: 1.5rem 2rem 6rem;
   border-radius: 44px;
 }
 
@@ -48,14 +48,14 @@ html, body {
   list-style-type: none;
 }
 
-.category:hover {
-  background-color: burlywood;
-}
-
 .category {
   background-color: navajowhite;
   border-radius: 12px;
   padding: 1.5rem;
+}
+
+.category:hover {
+  background-color: burlywood;
 }
 
 .questions {
@@ -64,25 +64,25 @@ html, body {
   gap: 2rem;
 }
 
-.questionStack {
+.question-stack {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.questionStack .question {
+.question-stack .question {
   font-weight: bold;
   list-style-type: decimal;
   list-style-position: inside;
 }
 
-.answerList {
+.answer-list {
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
 }
 
-.answerButton {
+.answer-button {
   background-color: ivory;
   text-align: start;
   border: peru 1px solid;
@@ -102,11 +102,11 @@ html, body {
   list-style-position: inside;
 }
 
-.answerButton:hover {
+.answer-button:hover {
   background-color: papayawhip;
 }
 
-@media (min-width: 576px) {
+@media screen and (576px <= width <= 768px) {
   #main {
       max-width: 600px;
   }
@@ -122,7 +122,7 @@ html, body {
   }
 }
 
-.quizHeader {
+.quiz-header {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -130,18 +130,18 @@ html, body {
   padding: 1rem 0;
 }
 
-.backButton p {
+.back-button p {
   font-weight: bold;
   font-size: 1.5rem;
   list-style-type: none;
 }
 
-.backButton {
+.back-button {
   display: flex;
   justify-content: left;
 }
 
-.quizTitle {
+.quiz-title {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -160,7 +160,7 @@ html, body {
   margin: auto;
 }
 
-.formButton {
+.form-button {
   background-color: peru;
   color: ivory;
   text-align: start;
@@ -176,7 +176,7 @@ html, body {
   margin: auto;
 }
 
-.formButton p {
+.form-button p {
   color: ivory;
 }
 
@@ -192,7 +192,7 @@ input {
   gap: 0.3rem;
 }
 
-.addAnswerButton {
+.add-answer-button {
   background-color: burlywood;
   border: burlywood 1px solid;
   border-radius: 10px;
