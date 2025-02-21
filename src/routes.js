@@ -5,43 +5,50 @@ import { logger } from './lib/logger.js';
 import { body, validationResult } from 'express-validator';
 
 export const router = express.Router();
+const db = getDatabase();
 
 router.get('/', async (req, res) => {
   try {
-    const categoryResult = await getDatabase()?.query('SELECT * FROM categories');
+    const categoryResult = await db?.query('SELECT * FROM categories');
     const categories = categoryResult?.rows ?? [];
-    res.render('index', { title: 'Spurningaleikur', categories });
+    res.render('index', { title: 'Spurningaleikur', form: false, categories, categoryName: null });
   } catch (e) {
     logger.error('Database query error: ' + e);
     res.status(500).send('Villa við að sækja flokk');
   }
 });
 
-router.get('/:category', async (req, res) => {
-  // TEMP EKKI READY FYRIR PRODUCTION
-  try {
-    const categoryName = req.params.category;
-    const categoryResult = await getDatabase()?.query('SELECT id from categories WHERE name = $1', [categoryName]);
-    
-    if (!categoryResult?.rows.length) {
-      return res.status(404).send("Flokkur ekki fundinn");
-    }
-    const categoryId = categoryResult.rows[0].id;
-    const questionResult = await getDatabase()?.query('SELECT * FROM questions WHERE category_id = $1', [categoryId]);
-    const answerResult = await getDatabase()?.query('SELECT * FROM answers');
-  
-    const questions = questionResult?.rows ?? [];
-    const answers = answerResult?.rows ?? [];
-    
-    res.render('category', { categoryName, questions, answers });
-  } catch(e) {
-    logger.error('Database query error: ' + e);
-    res.status(500).send('Villa við að sækja spurningar og svör');
-  }
+router.get('/form', (req, res) => {
+  res.render('form', { form: true, title: 'Búa til spurningu', categoryName: null });
 });
 
-router.get('/form', (req, res) => {
-  res.render('form', { title: 'Búa til spurningu' });
+router.get('/:category', async (req, res) => {
+  const categoryName = req.params.category;
+
+  const categoryResult = await db?.query('SELECT id from categories WHERE name = $1', [categoryName]);
+  
+  if (!categoryResult || categoryResult.rows.length === 0) {
+    return res.status(404).send("Flokkur ekki fundinn");
+  }
+
+  const categoryId = categoryResult.rows[0].id;
+  const categories = categoryResult?.rows ?? [];
+
+  const questionResult = await db?.query('SELECT * FROM questions WHERE category_id = $1', [categoryId]);
+  const answerResult = await db?.query('SELECT * FROM answers WHERE question_id IN (SELECT id FROM questions WHERE category_id = $1)', [categoryId]);
+
+  const questions = questionResult?.rows ?? [];
+  const answers = answerResult?.rows ?? [];
+
+  const questionsWithAnswers = questions.map(question => {
+    const questionAnswers = answers.filter(answer => answer.question_id === question.id);
+    return {
+      ...question,
+      answers: questionAnswers
+    };
+  });
+
+  res.render('category', { categoryName, questions: questionsWithAnswers });
 });
 
 router.post('/form', [ 
@@ -67,7 +74,6 @@ router.post('/form', [
   }
 
   const { category, question, answers, correctAnswer } = req.body;
-  const db = getDatabase();
 
   try {
     const env = environment(process.env, logger);

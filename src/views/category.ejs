@@ -1,11 +1,24 @@
 <%- include('header') -%>
 
-<a href="/" class="back-button"><p><</p></a>
-<ul class="questions">
-    <% locals.questions.forEach((question, question_index) => { %>
-        <li class="question"><%=question.question_text%></li>
-    <% }) %>
-</ul>
-<button type="submit" class="form-button">Senda inn svör</a>
+<div class="category-page">
+    <div class="question-stack">
+        <% locals.questions.forEach((question, question_index) => { %>
+            <div class="question-answer-pair">
+                <h2 class="question"><%= question_index + 1 %>. <%=question.question_text%></h2>
+                <% question.answers.forEach((answer, answer_index) => { %>
+                    <label class="radio-container">
+                        <input name="<%= question_index %>" type="radio" value="<%= answer.answer %>" <%= answer.correct ? 'checked' : '' %> />
+                        <%= answer.answer %>
+                        <span class="checkmark"></span>
+                    </label>
+                <% }) %>
+            </div>
+        <% }) %>
+    </div>
+    <div class="question-button-menu">
+        <a href="/form" class="add-question-button">Bæta við spurningu</a>
+        <button type="submit" class="form-button">Senda inn svör</button>
+    </div>
+</div>
 
 <%- include('footer') -%>

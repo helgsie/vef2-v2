@@ -1,13 +1,17 @@
 <%- include('header') -%>
 
-<div class="category-section">
-  <p class="small-title">Veldu flokk:</p>
-  <ul class="categories">
-    <% for (const category of categories) { %>
-      <a href="/<%=category.name%>"><li class="category"><%=category.name%></li></a>
-    <% } %>
-  </ul>
+<div class="index-content">
+  <div class="category-section">
+    <p class="small-title">Veldu flokk:</p>
+    <ul class="categories">
+      <% for (const category of categories) { %>
+        <a href="/<%=category.name%>"><li class="category"><%=category.name%></li></a>
+      <% } %>
+    </ul>
+  </div>
+  <div class="add-question-button">
+    <a href="/form">Bæta við spurningu</a>
+  </div> 
 </div>
-<a href="/form" class="form-button">Bæta við spurningu</button>
 
 <%- include('footer') -%>

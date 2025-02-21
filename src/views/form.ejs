@@ -1,32 +1,31 @@
 <%- include('header') -%>
 
-<li class="back-button"><a href="/"><</a></li>
 <form class="form" method="post" action="/form">
   <!-- Flokkaval -->
   <div class="flokkaval">
-    <label for="spurningaflokkur">Veldu flokk</label>
+    <label for="spurningaflokkur">Veldu spurningaflokk</label>
     <select id="spurningaflokkur" name="spurningaflokkur">
-    <option value="html">HTML</option>
-    <option value="css">CSS</option>
-    <option value="javascript">Javascript</option>
-  </select>
+      <option value="html">HTML</option>
+      <option value="css">CSS</option>
+      <option value="javascript">Javascript</option>
+    </select>
   </div>
 
   <!-- Spurning -->
   <div class="spurning">
     <label for="name">Spurning</label>
-    <textarea id="question-input" name="name" rows="5" required></textarea>
+    <textarea id="question-input" name="name" rows="5" placeholder="Sláðu inn spurningu..." required></textarea>
   </div>
 
   <!-- Svarmöguleikar -->
-   <div class="svarmoguleikar">
-      <label for="answers">Svarmöguleikar</label>
-      <div id="answers">
-        <input type="text" name="svar-texti" class="svar-texti" placeholder="Svar..." required>
-        <input type="radio" name="rett_svar" value="0" class="rett-radio"> Rétt?
-      </div>
-   </div>
-   <button type="button" id="add-answer" class="add-answer-button">Bæta við svarmöguleika</button>
+  <div class="svarmoguleikar">
+    <label for="answers">Svarmöguleikar</label>
+    <div id="answers" class="answers">
+      <input type="text" name="svar-texti" class="svar-texti" placeholder="Sláðu inn svar..." required>
+      <input type="radio" name="rett_svar" value="0" class="rett-radio"> Rétt?
+    </div>
+    <button type="button" id="add-answer" class="add-answer-button">+</button>
+  </div>
 
    <!-- Svartakki-->
   <button class="form-button" type="submit">Búa til spurningu</button>

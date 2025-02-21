@@ -15,7 +15,7 @@ const INSERT_FILE = './sql/insert.sql';
  * @param {import('./lib/logger.js').Logger} logger
  * @returns {Promise<boolean>}
  */
-async function setupDbFromFiles(db, logger) {
+export async function setupDbFromFiles(db, logger) {
   const dropScript = await readFile(DROP_SCHEMA_FILE);
   const createScript = await readFile(SCHEMA_FILE);
   const insertScript = await readFile(INSERT_FILE);

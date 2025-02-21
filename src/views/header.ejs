@@ -9,7 +9,13 @@
 
 <body>
   <main id="main">
-
-    <header>
-      <h1 class="title"><%= locals.title ?? '' %></h1>
+    <header class="header">
+      <% if (categoryName || form) { %>
+        <div class="quiz-header">
+          <a href="/" class="back-button"><p><</p></a>
+          <h1 class="quiz-title"><%= categoryName ?? locals.title ?? '' %></h1>
+        </div>
+      <% } else { %>
+        <h1 class="title"><%= locals.title ?? '' %></h1>
+      <% } %>
     </header>

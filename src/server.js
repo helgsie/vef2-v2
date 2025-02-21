@@ -24,8 +24,14 @@ app.use((req, res) => {
 })
 
 app.use((err, req, res, next) => {
-  res.status(500).render('error').json({ error: '500', message: 'Something went wrong'})
-})
+
+  if (req.headers['content-type'] === 'application/json') {
+    res.json({ error: '500', message: 'Something went wrong'})
+  } else {
+    res.render('error', { error: '500', message: 'Something went wrong' });
+  }
+  
+});
 
 const hostname = process.env.NODE_ENV === 'production' ? '0.0.0.0' : '127.0.0.1';
 const port = 3000;
