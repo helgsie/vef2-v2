@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS categories (
 );
 CREATE TABLE IF NOT EXISTS questions (
   id SERIAL PRIMARY KEY,
-  question TEXT NOT NULL,
+  question_text TEXT NOT NULL,
   category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE
 );
 CREATE TABLE IF NOT EXISTS answers (
